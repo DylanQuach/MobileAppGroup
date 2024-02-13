@@ -1,9 +1,12 @@
 package com.example.drawingapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import com.example.drawingapp.databinding.ActivityMainBinding
+
+val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+
+//val recycler by lazy{ binding.settingRecycler }
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
