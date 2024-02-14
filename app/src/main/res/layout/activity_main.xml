@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="160dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/settingRecycler"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/selectSettingFragmentView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="146dp" />
 
 </LinearLayout>
