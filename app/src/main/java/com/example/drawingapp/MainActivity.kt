@@ -5,23 +5,48 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.drawingapp.databinding.ActivityMainBinding
 
-//val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
-
-//val recycler by lazy{ binding.settingRecycler }
 
 class MainActivity : AppCompatActivity() {
-    companion object
-    {
-        var hasSeenSplash = false
-    }
+
+    val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+
+    val recycler by lazy{ binding.settingRecycler }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
         if(!hasSeenSplash)
         {
             val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
             startActivity(gotoSplashScreen)
             hasSeenSplash = true
         }
+
+        val selectFragment = SelectSettingFragment()
+        selectFragment.setListener {
+            if (it == "color") {
+                val selectedFrag = ColorFragment()
+                val fTrans = supportFragmentManager.beginTransaction()
+                fTrans.replace(R.id.settingFragment, selectedFrag)
+                fTrans.commit()
+            }
+            else if (it == "brush") {
+                val selectedFrag = BrushFragment()
+                val fTrans = supportFragmentManager.beginTransaction()
+                fTrans.replace(R.id.settingFragment, selectedFrag)
+                fTrans.commit()
+            }
+            else if (it == "size") {
+                val selectedFrag = SizeFragment()
+                val fTrans = supportFragmentManager.beginTransaction()
+                fTrans.replace(R.id.settingFragment, selectedFrag)
+                fTrans.commit()
+            }
+        }
+        val fTrans = supportFragmentManager.beginTransaction()
+        fTrans.replace(R.id.selectSettingFragmentView, selectFragment)
+        fTrans.commit()
     }
 }
