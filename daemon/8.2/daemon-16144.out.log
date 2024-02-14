@@ -372,7 +372,7 @@ BUILD SUCCESSFUL in 29s
 2024-02-14T10:45:14.443-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\res\values\strings.xml
 2024-02-14T10:45:14.449-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change MODIFIED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\AndroidManifest.xml
 2024-02-14T10:45:14.464-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\res\layout\activity_splash_screen.xml
-2024-02-14T10:45:14.470-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\java\com\example\drawingapp\SplashScreen.kt
+2024-02-14T10:45:14.470-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change CREATED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\java\com\example\drawingapp\CustomSplashScreen.kt
 2024-02-14T10:45:15.469-0700 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:59700 to /127.0.0.1:59553.
 2024-02-14T10:45:15.483-0700 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 143: received class org.gradle.launcher.daemon.protocol.InvalidateVirtualFileSystem
 2024-02-14T10:45:15.484-0700 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 143: Received non-IO message from client: InvalidateVirtualFileSystem[id=5c6bae89-de12-4b57-a399-e78f3bbaabfa]
@@ -1180,7 +1180,7 @@ BUILD SUCCESSFUL in 2m 9s
 2024-02-14T11:00:22.611-0700 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=20b557c6-e501-4c5b-bf25-0822e2c51f00,javaHome=C:\Program Files\Android\Android Studio\jbr,daemonRegistryDir=C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\daemon,pid=16144,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
 2024-02-14T11:00:22.612-0700 [INFO] [org.gradle.launcher.daemon.server.exec.ForwardClientInput] Closing daemon's stdin at end of input.
 2024-02-14T11:00:22.612-0700 [INFO] [org.gradle.launcher.daemon.server.exec.ForwardClientInput] The daemon will no longer process any standard input.
-w: file:///C:/Users/Noah/AndroidStudioProjects/MobileAppGroup/app/src/main/java/com/example/drawingapp/SplashScreen.kt:13:9 'constructor Handler()' is deprecated. Deprecated in Java
+w: file:///C:/Users/Noah/AndroidStudioProjects/MobileAppGroup/app/src/main/java/com/example/drawingapp/CustomSplashScreen.kt:13:9 'constructor Handler()' is deprecated. Deprecated in Java
 
 BUILD SUCCESSFUL in 38s
 36 actionable tasks: 15 executed, 21 up-to-date
@@ -1696,7 +1696,7 @@ BUILD SUCCESSFUL in 5s
 2024-02-14T11:06:57.188-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
 2024-02-14T11:06:57.188-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
 2024-02-14T11:06:57.189-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
-2024-02-14T11:06:59.312-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\java\com\example\drawingapp\SplashScreen.kt
+2024-02-14T11:06:59.312-0700 [DEBUG] [org.gradle.internal.watch.vfs.impl.WatchingVirtualFileSystem] Handling VFS change REMOVED C:\Users\Noah\AndroidStudioProjects\MobileAppGroup\app\src\main\java\com\example\drawingapp\CustomSplashScreen.kt
 2024-02-14T11:07:07.186-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
 2024-02-14T11:07:07.186-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
 2024-02-14T11:07:07.186-0700 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.

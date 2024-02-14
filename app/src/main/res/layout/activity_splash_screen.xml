@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen">
+    tools:context=".CustomSplashScreen">
 
     <ImageView
         android:id="@+id/imageView"
@@ -13,5 +13,6 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splash" />
+        app:srcCompat="@drawable/splash"
+        android:contentDescription="Splash screen image" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,18 @@ import com.example.drawingapp.databinding.ActivityMainBinding
 //val recycler by lazy{ binding.settingRecycler }
 
 class MainActivity : AppCompatActivity() {
+    companion object
+    {
+        var hasSeenSplash = false
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
-        startActivity(gotoSplashScreen)
+        if(!hasSeenSplash)
+        {
+            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
+            startActivity(gotoSplashScreen)
+            hasSeenSplash = true
+        }
     }
 }
