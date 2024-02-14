@@ -1,8 +1,10 @@
 package com.example.drawingapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.drawingapp.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,9 +12,17 @@ class MainActivity : AppCompatActivity() {
 
     val recycler by lazy{ binding.settingRecycler }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
+        if(!hasSeenSplash)
+        {
+            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
+            startActivity(gotoSplashScreen)
+            hasSeenSplash = true
+        }
 
         val selectFragment = SelectSettingFragment()
         selectFragment.setListener {
@@ -38,6 +48,5 @@ class MainActivity : AppCompatActivity() {
         val fTrans = supportFragmentManager.beginTransaction()
         fTrans.replace(R.id.selectSettingFragmentView, selectFragment)
         fTrans.commit()
-
     }
 }
