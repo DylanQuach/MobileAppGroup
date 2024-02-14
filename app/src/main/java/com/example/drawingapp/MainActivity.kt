@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val gotoSplashScreen = Intent(this@MainActivity, SplashScreen::class.java)
-//        startActivity(gotoSplashScreen)
+        val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
+        startActivity(gotoSplashScreen)
     }
 }
