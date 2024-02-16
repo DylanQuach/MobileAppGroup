@@ -2,6 +2,7 @@ package com.example.drawingapp
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.drawingapp.databinding.ActivityMainBinding
 
@@ -11,18 +12,26 @@ class MainActivity : AppCompatActivity() {
     val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
 
 //    val recycler by lazy{ binding.settingRecycler }
+companion object {
+    var hasSeenSplash = false
+}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //View Model initialization - Dylan
+        val myViewModel : BrushViewModel by viewModels()
+
+        myViewModel.pickBrush("Triangle")
         
-//        if(!hasSeenSplash)
-//        {
-//            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
-//            startActivity(gotoSplashScreen)
-//            hasSeenSplash = true
-//        }
+        if(!hasSeenSplash)
+        {
+            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
+            hasSeenSplash = true
+            startActivity(gotoSplashScreen)
+        }
 
         // Emi code start
         val drawFragment = canvasFragment()
