@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 //import com.example.drawingapp.databinding.ActivityMainBinding
 import yuku.ambilwarna.AmbilWarnaDialog
+import androidx.activity.viewModels
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var layout: ConstraintLayout
     lateinit var colorBtn: Button
 //    val recycler by lazy{ binding.settingRecycler }
+companion object {
+    var hasSeenSplash = false
+}
 
     companion object {
         var hasSeenSplash = false
@@ -25,6 +29,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //View Model initialization - Dylan
+        val myViewModel : BrushViewModel by viewModels()
+
+        myViewModel.pickBrush("Triangle")
+
         findViewById<View>(R.id.colorPreview).setBackgroundColor(this@MainActivity.color)
         if(!hasSeenSplash)
         {

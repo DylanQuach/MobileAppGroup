@@ -5,27 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".BrushFragment">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <Button
+        android:id="@+id/circleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Circle Brush" />
 
-        <RadioButton
-            android:id="@+id/triangleBrush"
-            android:layout_width="141dp"
-            android:layout_height="wrap_content"
-            android:text="Triangle Brush" />
+    <Button
+        android:id="@+id/triangleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="TriangleBrush" />
 
-        <RadioButton
-            android:id="@+id/squareBrush"
-            android:layout_width="143dp"
-            android:layout_height="wrap_content"
-            android:text="Square Brush" />
-
-        <RadioButton
-            android:id="@+id/circleBrush"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Circle Brush" />
-    </RadioGroup>
+    <Button
+        android:id="@+id/squareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Square Brush" />
 </LinearLayout>
