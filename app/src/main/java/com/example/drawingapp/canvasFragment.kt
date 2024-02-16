@@ -1,14 +1,20 @@
 package com.example.drawingapp
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import com.example.drawingapp.databinding.FragmentCanvasBinding
+import androidx.core.graphics.toColor
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.drawingapp.databinding.FragmentCanvasBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +39,7 @@ class canvasFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,30 +50,37 @@ class canvasFragment : Fragment() {
 
         val viewModel : BrushViewModel by activityViewModels()
         viewModel.color.observe(viewLifecycleOwner){
-            binding.customView.drawCircle(it)
+            //binding.customView.drawCircle(it)
+            binding.customView.drawPaper()
         }
-        return binding.root
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_canvas, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment canvasFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            canvasFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val my_paint = Paint()
+        my_paint.color = Color.RED
+
+        binding.customView.setOnTouchListener { _, event ->
+            val x = event.x
+            val y = event.y
+
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+
+                    binding.customView.addPoint(x,y)
+                }
+                MotionEvent.ACTION_MOVE -> {
+
+                    binding.customView.addPoint(x,y)
+                }
+                MotionEvent.ACTION_UP -> {
+
+                    binding.customView.addPoint(x,y)
                 }
             }
+            true // Return true to indicate that you've handled the touch event
+        }
+
+        return binding.root
+
     }
+
+
 }
