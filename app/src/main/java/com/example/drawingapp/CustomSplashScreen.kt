@@ -14,6 +14,6 @@ class CustomSplashScreen : AppCompatActivity() {
             val intent = Intent(this@CustomSplashScreen, MainActivity::class.java)
             startActivity(intent)
             finish()//prevents the user from backing out to the splash screen again
-        },2500)
+        },1500)
     }
 }
