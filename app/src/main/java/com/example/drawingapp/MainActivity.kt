@@ -25,16 +25,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+        findViewById<View>(R.id.colorPreview).setBackgroundColor(this@MainActivity.color)
         if(!hasSeenSplash)
         {
             val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
             startActivity(gotoSplashScreen)
             hasSeenSplash = true
         }
-
-
-
 
         // Emi code start
         val drawFragment = canvasFragment()
@@ -44,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
 
         // Emi code finish
-
         val selectFragment = SelectSettingFragment()
         selectFragment.setListener {
             if (it == "color") {
@@ -71,8 +67,7 @@ class MainActivity : AppCompatActivity() {
         fTrans.commit()
 
 
-        colorBtn = findViewById<Button>(R.id.backButton)
-        //layout = findViewById<ConstraintLayout>(R.id.mainLayout)
+        colorBtn = findViewById<Button>(R.id.selectColorBtn)
 
         color = ContextCompat.getColor(this@MainActivity, com.google.android.material.R.color.design_default_color_primary)
 
@@ -96,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
                 this@MainActivity.color = color
-                findViewById<View>(R.id.colorButton).setBackgroundColor(this@MainActivity.color)
+                findViewById<View>(R.id.brushColorPreview).setBackgroundColor(this@MainActivity.color)
             }
         }
         val warn = AmbilWarnaDialog(this, color, ambiListener)

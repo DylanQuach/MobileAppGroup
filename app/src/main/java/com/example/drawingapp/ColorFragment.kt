@@ -28,12 +28,6 @@ class ColorFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        //var colorBtn = findViewById<Button>(R.id.backButton)
-
-        /*colorBtn.setOnClickListener{
-            //openColorPicker()
-        }*/
     }
 
     override fun onCreateView(
