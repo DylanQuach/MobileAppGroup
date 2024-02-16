@@ -10,19 +10,28 @@ class MainActivity : AppCompatActivity() {
 
     val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
 
-    val recycler by lazy{ binding.settingRecycler }
+//    val recycler by lazy{ binding.settingRecycler }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         
-        if(!hasSeenSplash)
-        {
-            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
-            startActivity(gotoSplashScreen)
-            hasSeenSplash = true
-        }
+//        if(!hasSeenSplash)
+//        {
+//            val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
+//            startActivity(gotoSplashScreen)
+//            hasSeenSplash = true
+//        }
+
+        // Emi code start
+        val drawFragment = canvasFragment()
+        val transaction = this.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.drawingFragment, drawFragment, "draw_tag")
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+        // Emi code finish
 
         val selectFragment = SelectSettingFragment()
         selectFragment.setListener {

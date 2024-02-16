@@ -6,9 +6,15 @@
     tools:context=".canvasFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="hello world for canvas" />
+
+    <com.example.drawingapp.CustomView
+        android:id="@+id/customView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

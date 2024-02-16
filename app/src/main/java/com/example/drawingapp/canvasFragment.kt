@@ -1,10 +1,14 @@
 package com.example.drawingapp
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import com.example.drawingapp.databinding.FragmentCanvasBinding
+import androidx.fragment.app.activityViewModels
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,12 +33,21 @@ class canvasFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val binding = FragmentCanvasBinding.inflate(inflater)
+
+        val viewModel : BrushViewModel by activityViewModels()
+        viewModel.color.observe(viewLifecycleOwner){
+            binding.customView.drawCircle(it)
+        }
+        return binding.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_canvas, container, false)
+        //return inflater.inflate(R.layout.fragment_canvas, container, false)
     }
 
     companion object {
