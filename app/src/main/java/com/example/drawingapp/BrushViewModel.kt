@@ -19,6 +19,7 @@ class BrushViewModel : ViewModel(){
 
     @RequiresApi(Build.VERSION_CODES.O)
     val color  = _color as LiveData<Color>
+    public var intColor = 1;
 
     val brush = _brush as LiveData<String>
 
