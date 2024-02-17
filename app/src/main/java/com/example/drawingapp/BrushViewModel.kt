@@ -17,11 +17,15 @@ class BrushViewModel : ViewModel(){
 
     private val _brush : MutableLiveData<String> = MutableLiveData("")
 
+    private val _size : MutableLiveData<Int> = MutableLiveData(1)
+
     @RequiresApi(Build.VERSION_CODES.O)
     val color  = _color as LiveData<Color>
     public var intColor = 1;
 
     val brush = _brush as LiveData<String>
+
+    val size = _size as LiveData<Int>
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun pickColor(){
@@ -33,8 +37,8 @@ class BrushViewModel : ViewModel(){
     fun pickBrush(newBrush: String){
         _brush.value = newBrush
     }
-    fun pickBrushSize(size: Int){
-
+    fun pickBrushSize(newSize: Int){
+        _size.value = newSize
     }
 
     fun doSomething(){

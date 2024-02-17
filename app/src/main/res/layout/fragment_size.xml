@@ -11,10 +11,11 @@
     <SeekBar
         android:id="@+id/sizeSlider"
         android:layout_width="280dp"
-        android:layout_height="84dp" />
+        android:layout_height="84dp"
+        android:max="50" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/sizeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

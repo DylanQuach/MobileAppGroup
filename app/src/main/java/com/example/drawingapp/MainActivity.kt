@@ -1,15 +1,15 @@
 package com.example.drawingapp
 
+//import com.example.drawingapp.databinding.ActivityMainBinding
+//import yuku.ambilwarna.AmbilWarnaDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-//import com.example.drawingapp.databinding.ActivityMainBinding
-import yuku.ambilwarna.AmbilWarnaDialog
-import androidx.activity.viewModels
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var layout: ConstraintLayout
     lateinit var colorBtn: Button
 //    val recycler by lazy{ binding.settingRecycler }
-companion object {
-    var hasSeenSplash = false
-}
 
     companion object {
         var hasSeenSplash = false
@@ -81,9 +78,9 @@ companion object {
 
         color = ContextCompat.getColor(this@MainActivity, com.google.android.material.R.color.design_default_color_primary)
 
-        colorBtn.setOnClickListener{
-            openColorPicker()
-        }
+        //colorBtn.setOnClickListener{
+        //    openColorPicker()
+        //}
 
 
 
@@ -94,7 +91,7 @@ companion object {
      * the dialog window the color will be selected and the colorDisplay will
      * be updated
      */
-    public fun openColorPicker() {
+/*    public fun openColorPicker() {
 
         val ambiListener = object : AmbilWarnaDialog.OnAmbilWarnaListener{
             override fun onCancel(dialog: AmbilWarnaDialog?) {}
@@ -108,5 +105,5 @@ companion object {
 
         warn.show()
 
-    }
+    }*/
 }
