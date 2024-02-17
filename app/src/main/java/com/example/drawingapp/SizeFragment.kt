@@ -31,7 +31,7 @@ class SizeFragment : Fragment() {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                myViewModel.pickBrushSize(progress)
+                myViewModel.pickBrushSize(progress.toFloat())
                 binding.sizeNum.text = binding.sizeSlider.progress.toString()
             }
         })

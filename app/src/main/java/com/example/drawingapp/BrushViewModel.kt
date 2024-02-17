@@ -1,44 +1,43 @@
 package com.example.drawingapp
 
-import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlin.random.Random
 
 class BrushViewModel : ViewModel(){
 
     //Model
     @RequiresApi(Build.VERSION_CODES.O)
-    private val _color : MutableLiveData<Color> =
-        MutableLiveData(Color.valueOf(1f, 1f, 0f))
+    private val _color : MutableLiveData<String> =
+        MutableLiveData("Red")
 
     private val _brush : MutableLiveData<String> = MutableLiveData("")
 
-    private val _size : MutableLiveData<Int> = MutableLiveData(1)
+    private val _size : MutableLiveData<Float> = MutableLiveData(1.0f)
 
     @RequiresApi(Build.VERSION_CODES.O)
-    val color  = _color as LiveData<Color>
+    val color  = _color as LiveData<String>
     public var intColor = 1;
 
     val brush = _brush as LiveData<String>
 
-    val size = _size as LiveData<Int>
+    val size = _size as LiveData<Float>
+
+    var sizeTrue = 0.0f
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun pickColor(){
-        with(Random.Default) {
-            _color.value = Color.valueOf(nextFloat(), nextFloat(), nextFloat())
-        }
+    fun pickColor(newColor: String){
+            _color.value = newColor
     }
     
     fun pickBrush(newBrush: String){
         _brush.value = newBrush
     }
-    fun pickBrushSize(newSize: Int){
+    fun pickBrushSize(newSize: Float){
         _size.value = newSize
+        sizeTrue = newSize
     }
 
     fun doSomething(){
@@ -46,7 +45,16 @@ class BrushViewModel : ViewModel(){
     }
 
     fun getBrush(): String? {
-        return _brush.value
+        return brush.value
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getColor(): String? {
+        return _color.value
+    }
+
+    fun getBrushSize(): LiveData<Float> {
+        return size
     }
 
 }

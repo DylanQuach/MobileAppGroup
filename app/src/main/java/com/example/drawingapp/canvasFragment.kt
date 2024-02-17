@@ -10,7 +10,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentCanvasBinding
@@ -60,6 +59,13 @@ class canvasFragment : Fragment() {
         binding.customView.setOnTouchListener { _, event ->
             val x = event.x
             val y = event.y
+
+
+            viewModel.getBrush()?.let {
+                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
+                    it
+                )
+            }
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

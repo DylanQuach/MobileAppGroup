@@ -5,13 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
-import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
 
 class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+
 
     //OK for this demo, but views are created/destroyed during lifecycle events so
     //this should really be stored in a viewmodel!
@@ -26,13 +24,15 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val points = mutableListOf<Pair<Float, Float>>()
 
+
+
     // Standalone method to add a point
     fun addPoint(x: Float, y: Float) {
         points.add(Pair(x, y))
         invalidate() // Redraw the view
     }
 
-    private val pointPaint = Paint().apply {
+    private var pointPaint = Paint().apply {
         color = Color.RED
         strokeWidth = 10f
         paint.isAntiAlias = true
@@ -60,6 +60,14 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     public fun drawPaper(){
         paint.color = Color.WHITE
         bitmapCanvas.drawRect(0f,0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
+    }
+
+    public fun setPointPaint(newColor: String, stroke: Float, brush: String) {
+        pointPaint = Paint().apply {
+            color = Color.parseColor(newColor)
+            strokeWidth = stroke
+            paint.isAntiAlias = true
+        }
     }
 
 
