@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -72,7 +71,7 @@ class canvasFragment : Fragment() {
 
                     //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
 
-                    binding.customView.newDrawing(viewModel.getColor())
+                    binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value)
                 }
                 MotionEvent.ACTION_MOVE -> {
 

@@ -40,13 +40,16 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         for (drawing in drawingList) {
 
             for (point in drawing.getPoints()) {
-                canvas.drawPoint(point.first, point.second, drawing.getPaint())
+                canvas.drawCircle(point.first, point.second, drawing.getBrushSize()/2, drawing.getPaint())
+
             }
         }
+
 
         // Drawing lines between points
         for (drawing in drawingList) {
             val points = drawing.getPoints()
+            drawing.setStrokeWidth(drawing.getBrushSize())
             for (i in 0 until points.size - 1) {
                 val startPoint = points[i]
                 val endPoint = points[i + 1]
@@ -56,9 +59,10 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     }
 
-    public fun newDrawing(color: String?) {
+    public fun newDrawing(color: String?, brushSize: Float?) {
         val obj = ContinuousDrawing()
         obj.setPaintColor(color)
+        obj.pickBrushSize(brushSize)
         // set paint to what user has chosen
         drawingList.add(obj)
     }

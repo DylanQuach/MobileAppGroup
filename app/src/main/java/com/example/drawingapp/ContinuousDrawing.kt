@@ -2,17 +2,22 @@ package com.example.drawingapp
 
 import android.graphics.Color
 import android.graphics.Paint
+import androidx.lifecycle.MutableLiveData
 
 class ContinuousDrawing {
 
     private val points = mutableListOf<Pair<Float, Float>>()
-    private val paint = Paint()
+
+    private var size: Float = 0.0f
 
     private var pointPaint = Paint().apply {
         color = Color.RED
         strokeWidth = 10f
-        paint.isAntiAlias = true
+        style=(Paint.Style.STROKE)
+        isAntiAlias = true
     }
+
+
 
     public fun setPaintColor(color: String?) {
         pointPaint.color = Color.parseColor(color)
@@ -42,6 +47,27 @@ class ContinuousDrawing {
     // Example method to print the points
     fun printPoints() {
         println(points)
+    }
+
+    fun getBrushSize(): Float {
+        return size
+    }
+
+    fun setStrokeWidth(width: Float){
+        pointPaint.strokeWidth = width
+    }
+
+    fun pickBrushSize(newSize: Float?) {
+
+        if (newSize != null) {
+            size = newSize
+        }
+
+        if (newSize != null) {
+
+            pointPaint.strokeWidth = newSize
+        }
+
     }
 
 }
