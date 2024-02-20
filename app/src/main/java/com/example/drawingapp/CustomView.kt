@@ -21,14 +21,10 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     //use the lazy delegated property to initialize it on first access, once the size is set
     private val rect: Rect by lazy {Rect(0,0,width, height)}
 
+    private val drawingList = ArrayList<ContinuousDrawing>()
 
-    private val points = mutableListOf<Pair<Float, Float>>()
-
-
-
-    // Standalone method to add a point
-    fun addPoint(x: Float, y: Float) {
-        points.add(Pair(x, y))
+    fun addPoint(x: Float, y: Float, id: Int){
+        drawingList[id].addElement(x,y)
         invalidate() // Redraw the view
     }
 
@@ -42,21 +38,29 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         super.onDraw(canvas)
         canvas.drawBitmap(bitmap, null, rect, paint)
 
-        // Draw all the points
-        for (point in points) {
-            canvas.drawPoint(point.first, point.second, pointPaint)
+        // Draw all the points for each ContinuousDrawing
+        for (drawing in drawingList) {
+            for (point in drawing.getPoints()) {
+                canvas.drawPoint(point.first, point.second, pointPaint)
+            }
         }
 
-        // Draw lines between points
-        for (i in 0 until points.size - 1) {
-            val (startX, startY) = points[i]
-            val (endX, endY) = points[i + 1]
-            canvas.drawLine(startX, startY, endX, endY, pointPaint)
+        // Drawing lines between points
+        for (drawing in drawingList) {
+            val points = drawing.getPoints()
+            for (i in 0 until points.size - 1) {
+                val startPoint = points[i]
+                val endPoint = points[i + 1]
+                canvas.drawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, pointPaint)
+            }
         }
 
     }
 
-
+    public fun newDrawing(){
+        val obj = ContinuousDrawing()
+        drawingList.add(obj)
+    }
     public fun drawPaper(){
         paint.color = Color.WHITE
         bitmapCanvas.drawRect(0f,0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
@@ -71,5 +75,6 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     }
 
 
-
 }
+
+

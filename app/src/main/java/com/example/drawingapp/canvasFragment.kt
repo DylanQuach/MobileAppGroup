@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -29,6 +30,7 @@ class canvasFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var drawingID = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,6 @@ class canvasFragment : Fragment() {
 
         val viewModel : BrushViewModel by activityViewModels()
         viewModel.color.observe(viewLifecycleOwner){
-            //binding.customView.drawCircle(it)
             binding.customView.drawPaper()
         }
 
@@ -61,6 +62,8 @@ class canvasFragment : Fragment() {
             val y = event.y
 
 
+
+
             viewModel.getBrush()?.let {
                 binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
                     it
@@ -70,16 +73,30 @@ class canvasFragment : Fragment() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 
-                    binding.customView.addPoint(x,y)
+                    //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
+
+                    //binding.customView.addPoint(x,y)
+                    // make an array list
+                    binding.customView.newDrawing()
                 }
                 MotionEvent.ACTION_MOVE -> {
 
-                    binding.customView.addPoint(x,y)
+                    binding.customView.addPoint(x,y, drawingID)
+
+
+
                 }
                 MotionEvent.ACTION_UP -> {
+                    // it signifies that the user has lifted their finger from the screen
 
-                    binding.customView.addPoint(x,y)
+                    // binding.customView.addPoint(x,y)
+
+                    drawingID++;
+
+                    Log.d("myTag", drawingID.toString());
+
                 }
+
             }
             true // Return true to indicate that you've handled the touch event
         }
