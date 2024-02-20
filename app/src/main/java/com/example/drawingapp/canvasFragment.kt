@@ -61,39 +61,28 @@ class canvasFragment : Fragment() {
             val x = event.x
             val y = event.y
 
-
-
-
-            viewModel.getBrush()?.let {
-                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
-                    it
-                )
-            }
+//            viewModel.getBrush()?.let {
+//                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
+//                    it
+//                )
+//            }
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 
                     //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
 
-                    //binding.customView.addPoint(x,y)
-                    // make an array list
-                    binding.customView.newDrawing()
+                    binding.customView.newDrawing(viewModel.getColor())
                 }
                 MotionEvent.ACTION_MOVE -> {
 
                     binding.customView.addPoint(x,y, drawingID)
 
-
-
                 }
                 MotionEvent.ACTION_UP -> {
                     // it signifies that the user has lifted their finger from the screen
 
-                    // binding.customView.addPoint(x,y)
-
                     drawingID++;
-
-                    Log.d("myTag", drawingID.toString());
 
                 }
 

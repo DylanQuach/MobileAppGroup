@@ -40,10 +40,6 @@ class BrushViewModel : ViewModel(){
         sizeTrue = newSize
     }
 
-    fun doSomething(){
-
-    }
-
     fun getBrush(): String? {
         return brush.value
     }

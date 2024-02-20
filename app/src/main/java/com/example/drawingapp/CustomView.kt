@@ -23,15 +23,13 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val drawingList = ArrayList<ContinuousDrawing>()
 
+    fun getDrawingList(): ArrayList<ContinuousDrawing> {
+        return drawingList
+    }
+
     fun addPoint(x: Float, y: Float, id: Int){
         drawingList[id].addElement(x,y)
         invalidate() // Redraw the view
-    }
-
-    private var pointPaint = Paint().apply {
-        color = Color.RED
-        strokeWidth = 10f
-        paint.isAntiAlias = true
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -40,8 +38,9 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
         // Draw all the points for each ContinuousDrawing
         for (drawing in drawingList) {
+
             for (point in drawing.getPoints()) {
-                canvas.drawPoint(point.first, point.second, pointPaint)
+                canvas.drawPoint(point.first, point.second, drawing.getPaint())
             }
         }
 
@@ -51,29 +50,22 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
             for (i in 0 until points.size - 1) {
                 val startPoint = points[i]
                 val endPoint = points[i + 1]
-                canvas.drawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, pointPaint)
+                canvas.drawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, drawing.getPaint())
             }
         }
 
     }
 
-    public fun newDrawing(){
+    public fun newDrawing(color: String?) {
         val obj = ContinuousDrawing()
+        obj.setPaintColor(color)
+        // set paint to what user has chosen
         drawingList.add(obj)
     }
     public fun drawPaper(){
         paint.color = Color.WHITE
         bitmapCanvas.drawRect(0f,0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
     }
-
-    public fun setPointPaint(newColor: String, stroke: Float, brush: String) {
-        pointPaint = Paint().apply {
-            color = Color.parseColor(newColor)
-            strokeWidth = stroke
-            paint.isAntiAlias = true
-        }
-    }
-
 
 }
 
