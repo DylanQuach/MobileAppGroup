@@ -29,6 +29,7 @@ class canvasFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var drawingID = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,6 @@ class canvasFragment : Fragment() {
 
         val viewModel : BrushViewModel by activityViewModels()
         viewModel.color.observe(viewLifecycleOwner){
-            //binding.customView.drawCircle(it)
             binding.customView.drawPaper()
         }
 
@@ -60,26 +60,31 @@ class canvasFragment : Fragment() {
             val x = event.x
             val y = event.y
 
-
-            viewModel.getBrush()?.let {
-                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
-                    it
-                )
-            }
+//            viewModel.getBrush()?.let {
+//                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
+//                    it
+//                )
+//            }
 
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 
-                    binding.customView.addPoint(x,y)
+                    //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
+
+                    binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value)
                 }
                 MotionEvent.ACTION_MOVE -> {
 
-                    binding.customView.addPoint(x,y)
+                    binding.customView.addPoint(x,y, drawingID)
+
                 }
                 MotionEvent.ACTION_UP -> {
+                    // it signifies that the user has lifted their finger from the screen
 
-                    binding.customView.addPoint(x,y)
+                    drawingID++;
+
                 }
+
             }
             true // Return true to indicate that you've handled the touch event
         }

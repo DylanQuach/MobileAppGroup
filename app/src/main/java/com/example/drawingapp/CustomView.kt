@@ -21,55 +21,56 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     //use the lazy delegated property to initialize it on first access, once the size is set
     private val rect: Rect by lazy {Rect(0,0,width, height)}
 
+    private val drawingList = ArrayList<ContinuousDrawing>()
 
-    private val points = mutableListOf<Pair<Float, Float>>()
-
-
-
-    // Standalone method to add a point
-    fun addPoint(x: Float, y: Float) {
-        points.add(Pair(x, y))
-        invalidate() // Redraw the view
+    fun getDrawingList(): ArrayList<ContinuousDrawing> {
+        return drawingList
     }
 
-    private var pointPaint = Paint().apply {
-        color = Color.RED
-        strokeWidth = 10f
-        paint.isAntiAlias = true
+    fun addPoint(x: Float, y: Float, id: Int){
+        drawingList[id].addElement(x,y)
+        invalidate() // Redraw the view
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawBitmap(bitmap, null, rect, paint)
 
-        // Draw all the points
-        for (point in points) {
-            canvas.drawPoint(point.first, point.second, pointPaint)
+        // Draw all the points for each ContinuousDrawing
+        for (drawing in drawingList) {
+
+            for (point in drawing.getPoints()) {
+                canvas.drawCircle(point.first, point.second, drawing.getBrushSize()/2, drawing.getPaint())
+
+            }
         }
 
-        // Draw lines between points
-        for (i in 0 until points.size - 1) {
-            val (startX, startY) = points[i]
-            val (endX, endY) = points[i + 1]
-            canvas.drawLine(startX, startY, endX, endY, pointPaint)
+
+        // Drawing lines between points
+        for (drawing in drawingList) {
+            val points = drawing.getPoints()
+            drawing.setStrokeWidth(drawing.getBrushSize())
+            for (i in 0 until points.size - 1) {
+                val startPoint = points[i]
+                val endPoint = points[i + 1]
+                canvas.drawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, drawing.getPaint())
+            }
         }
 
     }
 
-
+    public fun newDrawing(color: String?, brushSize: Float?) {
+        val obj = ContinuousDrawing()
+        obj.setPaintColor(color)
+        obj.pickBrushSize(brushSize)
+        // set paint to what user has chosen
+        drawingList.add(obj)
+    }
     public fun drawPaper(){
         paint.color = Color.WHITE
         bitmapCanvas.drawRect(0f,0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
     }
 
-    public fun setPointPaint(newColor: String, stroke: Float, brush: String) {
-        pointPaint = Paint().apply {
-            color = Color.parseColor(newColor)
-            strokeWidth = stroke
-            paint.isAntiAlias = true
-        }
-    }
-
-
-
 }
+
+
