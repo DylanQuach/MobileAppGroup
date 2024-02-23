@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 
@@ -40,9 +41,15 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         for (drawing in drawingList) {
 
             for (point in drawing.getPoints()) {
-                canvas.drawCircle(point.first, point.second, drawing.getBrushSize()/2, drawing.getPaint())
+                val left = point.first - drawing.getBrushSize() / 2
+                val top = point.second - drawing.getBrushSize() / 2
+                val right = point.first + drawing.getBrushSize() / 2
+                val bottom = point.second + drawing.getBrushSize() / 2
 
+                val rect = RectF(left, top, right, bottom)
+                canvas.drawRect(rect, paint)
             }
+
         }
 
 
