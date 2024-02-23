@@ -2,7 +2,6 @@ package com.example.drawingapp
 
 import android.graphics.Color
 import android.graphics.Paint
-import androidx.lifecycle.MutableLiveData
 
 class ContinuousDrawing {
 
@@ -22,7 +21,7 @@ class ContinuousDrawing {
     public fun setPaintColor(color: String?) {
         pointPaint.color = Color.parseColor(color)
         pointPaint.strokeWidth = 10f
-        pointPaint.isAntiAlias = true
+        //pointPaint.isAntiAlias = true
     }
 
     public fun getPaint(): Paint {
@@ -68,6 +67,21 @@ class ContinuousDrawing {
             pointPaint.strokeWidth = newSize
         }
 
+    }
+
+    fun pickBrush(newBrush: String?) {
+        if (newBrush == "Circle") {
+            pointPaint.strokeCap = Paint.Cap.ROUND
+            pointPaint.strokeJoin = Paint.Join.ROUND
+        }
+        else if (newBrush == "Square") {
+            pointPaint.strokeCap = Paint.Cap.SQUARE
+            pointPaint.strokeJoin = Paint.Join.MITER
+        }
+        else if (newBrush == "Triangle") {
+            pointPaint.strokeCap = Paint.Cap.SQUARE
+            pointPaint.strokeJoin = Paint.Join.MITER
+        }
     }
 
 }

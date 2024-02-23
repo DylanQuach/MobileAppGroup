@@ -71,7 +71,7 @@ class canvasFragment : Fragment() {
 
                     //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
 
-                    binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value)
+                    binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value, viewModel.getBrush())
                 }
                 MotionEvent.ACTION_MOVE -> {
 

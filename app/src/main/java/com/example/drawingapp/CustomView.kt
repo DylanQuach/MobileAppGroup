@@ -59,10 +59,11 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     }
 
-    public fun newDrawing(color: String?, brushSize: Float?) {
+    public fun newDrawing(color: String?, brushSize: Float?, brush: String?) {
         val obj = ContinuousDrawing()
         obj.setPaintColor(color)
         obj.pickBrushSize(brushSize)
+        obj.pickBrush(brush)
         // set paint to what user has chosen
         drawingList.add(obj)
     }
