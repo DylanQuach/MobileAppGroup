@@ -14,11 +14,8 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    //val binding: ActivityMainBinding by lazy {ActivityMainBinding.inflate(layoutInflater)}
     var color = 1
-    lateinit var layout: ConstraintLayout
     lateinit var colorBtn: Button
-//    val recycler by lazy{ binding.settingRecycler }
 
     companion object {
         var hasSeenSplash = false
@@ -78,32 +75,6 @@ class MainActivity : AppCompatActivity() {
 
         color = ContextCompat.getColor(this@MainActivity, com.google.android.material.R.color.design_default_color_primary)
 
-        //colorBtn.setOnClickListener{
-        //    openColorPicker()
-        //}
-
-
-
     }
 
-    /**
-     * displays the dialog box containing the color selection tool. upon closing
-     * the dialog window the color will be selected and the colorDisplay will
-     * be updated
-     */
-/*    public fun openColorPicker() {
-
-        val ambiListener = object : AmbilWarnaDialog.OnAmbilWarnaListener{
-            override fun onCancel(dialog: AmbilWarnaDialog?) {}
-
-            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
-                this@MainActivity.color = color
-                findViewById<View>(R.id.brushColorPreview).setBackgroundColor(this@MainActivity.color)
-            }
-        }
-        val warn = AmbilWarnaDialog(this, color, ambiListener)
-
-        warn.show()
-
-    }*/
 }

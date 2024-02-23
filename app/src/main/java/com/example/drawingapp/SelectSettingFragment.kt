@@ -51,26 +51,4 @@ class SelectSettingFragment : Fragment() {
         onclickButton = listener
     }
 
-    /**
-     * displays the dialog box containing the color selection tool. upon closing
-     * the dialog window the color will be selected and the colorDisplay will
-     * be updated
-     */
-/*    @RequiresApi(Build.VERSION_CODES.O)
-    public fun openColorPicker()
-    {
-        val viewModel : BrushViewModel by activityViewModels()
-
-        val ambiListener = object : AmbilWarnaDialog.OnAmbilWarnaListener{
-            override fun onCancel(dialog: AmbilWarnaDialog?) {}
-
-            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
-                viewModel.intColor = color
-                findViewById<View>(R.id.colorButton).setBackgroundColor(this@SelectSettingFragment.intColor)
-            }
-        }
-//        val warn = AmbilWarnaDialog(this, color, ambiListener)
-//        warn.show()
-
-    }*/
 }
