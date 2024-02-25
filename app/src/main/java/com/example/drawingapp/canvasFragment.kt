@@ -60,12 +60,6 @@ class canvasFragment : Fragment() {
             val x = event.x
             val y = event.y
 
-//            viewModel.getBrush()?.let {
-//                binding.customView.setPointPaint(viewModel.getColor().toString(), viewModel.sizeTrue,
-//                    it
-//                )
-//            }
-
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
 

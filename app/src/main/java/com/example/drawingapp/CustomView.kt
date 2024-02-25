@@ -1,9 +1,11 @@
 package com.example.drawingapp
+
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
@@ -19,7 +21,7 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     //width/height are 0 when the constructor is called
     //use the lazy delegated property to initialize it on first access, once the size is set
-    private val rect: Rect by lazy {Rect(0,0,width, height)}
+    private val rect: Rect by lazy { Rect(0, 0, width, height) }
 
     private val drawingList = ArrayList<ContinuousDrawing>()
 
@@ -27,34 +29,61 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         return drawingList
     }
 
-    fun addPoint(x: Float, y: Float, id: Int){
-        drawingList[id].addElement(x,y)
+    fun addPoint(x: Float, y: Float, id: Int) {
+        drawingList[id].addElement(x, y)
         invalidate() // Redraw the view
+    }
+
+    fun drawTriangle(canvas: Canvas, paint: Paint?, x: Float, y: Float, width: Int) {
+        val halfWidth = width / 2
+        val path = Path()
+        path.moveTo(x.toFloat(), (y - halfWidth).toFloat()) // Top
+        path.lineTo((x - halfWidth).toFloat(), (y + halfWidth).toFloat()) // Bottom left
+        path.lineTo((x + halfWidth).toFloat(), (y + halfWidth).toFloat()) // Bottom right
+        path.lineTo(x.toFloat(), (y - halfWidth).toFloat()) // Back to Top
+        path.close()
+        canvas.drawPath(path, paint!!)
+    }
+
+    fun drawTriangleWithStroke(canvas: Canvas) {
+        for (drawing in drawingList) {
+
+            if (drawing.getBrushType() == "Triangle") {
+                val points = drawing.getPoints()
+                val paint = drawing.getPaint()
+
+                for (point in points) {
+                    val x = point.first
+                    val y = point.second
+                    drawTriangle(canvas, paint, x, y, 100)
+                }
+            }
+        }
+
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawBitmap(bitmap, null, rect, paint)
 
-        // Draw all the points for each ContinuousDrawing
         for (drawing in drawingList) {
 
-            for (point in drawing.getPoints()) {
-                canvas.drawCircle(point.first, point.second, drawing.getBrushSize()/2, drawing.getPaint())
+            if (drawing.getBrushType() == "Triangle") {
+                drawTriangleWithStroke(canvas)
+            } else {
+                // Drawing points at each specified location
+                for (drawing in drawingList) {
+                    val points = drawing.getPoints()
+                    val paint = drawing.getPaint()
 
+                    for (point in points) {
+                        val x = point.first
+                        val y = point.second
+                        canvas.drawPoint(x, y, paint)
+                    }
+                }
             }
-        }
 
-
-        // Drawing lines between points
-        for (drawing in drawingList) {
-            val points = drawing.getPoints()
-            drawing.setStrokeWidth(drawing.getBrushSize())
-            for (i in 0 until points.size - 1) {
-                val startPoint = points[i]
-                val endPoint = points[i + 1]
-                canvas.drawLine(startPoint.first, startPoint.second, endPoint.first, endPoint.second, drawing.getPaint())
-            }
         }
 
     }
@@ -67,9 +96,10 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
         // set paint to what user has chosen
         drawingList.add(obj)
     }
-    public fun drawPaper(){
+
+    public fun drawPaper() {
         paint.color = Color.WHITE
-        bitmapCanvas.drawRect(0f,0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
+        bitmapCanvas.drawRect(0f, 0f, bitmap.width.toFloat(), bitmap.height.toFloat(), paint)
     }
 
 }

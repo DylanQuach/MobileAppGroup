@@ -1,7 +1,9 @@
 package com.example.drawingapp
 
 import android.graphics.Color
+import android.graphics.CornerPathEffect
 import android.graphics.Paint
+import android.graphics.Path
 
 class ContinuousDrawing {
 
@@ -9,13 +11,15 @@ class ContinuousDrawing {
 
     private var size: Float = 0.0f
 
+    private var brushType = "default"
+
     private var pointPaint = Paint().apply {
         color = Color.RED
         strokeWidth = 10f
-        style=(Paint.Style.STROKE)
+        style = (Paint.Style.STROKE)
         isAntiAlias = true
-    }
 
+    }
 
 
     public fun setPaintColor(color: String?) {
@@ -43,16 +47,11 @@ class ContinuousDrawing {
         return points
     }
 
-    // Example method to print the points
-    fun printPoints() {
-        println(points)
-    }
-
     fun getBrushSize(): Float {
         return size
     }
 
-    fun setStrokeWidth(width: Float){
+    fun setStrokeWidth(width: Float) {
         pointPaint.strokeWidth = width
     }
 
@@ -69,19 +68,24 @@ class ContinuousDrawing {
 
     }
 
+    public fun getBrushType(): String {
+        return brushType
+    }
+
     fun pickBrush(newBrush: String?) {
+
+        if (newBrush != null) {
+            brushType = newBrush
+        }
+
         if (newBrush == "Circle") {
             pointPaint.strokeCap = Paint.Cap.ROUND
             pointPaint.strokeJoin = Paint.Join.ROUND
-        }
-        else if (newBrush == "Square") {
+        } else if (newBrush == "Square") {
             pointPaint.strokeCap = Paint.Cap.SQUARE
             pointPaint.strokeJoin = Paint.Join.MITER
         }
-        else if (newBrush == "Triangle") {
-            pointPaint.strokeCap = Paint.Cap.SQUARE
-            pointPaint.strokeJoin = Paint.Join.MITER
-        }
+
     }
 
 }
