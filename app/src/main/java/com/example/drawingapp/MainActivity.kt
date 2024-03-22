@@ -22,22 +22,37 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //View Model initialization - Dylan
-        val myViewModel : BrushViewModel by viewModels()
 
-        myViewModel.pickBrush("Triangle")
+
+        val vm: BrushViewModel by viewModels{
+            WeatherViewModelFactory((application as PngFileApplicationClass))}
+
+        vm.pickBrush("Triangle")
+
+
+        //val myViewModel : BrushViewModel by viewModels()
+
+        //myViewModel.pickBrush("Triangle")
 
         findViewById<View>(R.id.colorPreview).setBackgroundColor(this@MainActivity.color)
-        if(!hasSeenSplash)
-        {
+
+        // Retrieve the value of hasSeenSplash from SharedPreferences
+        val sharedPrefs = getSharedPreferences("MyPrefs", MODE_PRIVATE)
+        val hasSeenSplash = sharedPrefs.getBoolean("hasSeenSplash", false)
+
+        if (!hasSeenSplash) {
             val gotoSplashScreen = Intent(this@MainActivity, CustomSplashScreen::class.java)
             startActivity(gotoSplashScreen)
-            hasSeenSplash = true
         }
 
         // Emi code start
-        val drawFragment = canvasFragment()
+
+        // danger starts here
+        val drawFragment = canvasFragment(vm)
         val transaction = this.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.drawingFragment, drawFragment, "draw_tag")
+        // danger ends here
+
         transaction.addToBackStack(null)
         transaction.commit()
 
@@ -45,19 +60,19 @@ class MainActivity : AppCompatActivity() {
         val selectFragment = SelectSettingFragment()
         selectFragment.setListener {
             if (it == "color") {
-                val selectedFrag = ColorFragment()
+                val selectedFrag = ColorFragment(vm)
                 val fTrans = supportFragmentManager.beginTransaction()
                 fTrans.replace(R.id.settingFragment, selectedFrag)
                 fTrans.commit()
             }
             else if (it == "brush") {
-                val selectedFrag = BrushFragment()
+                val selectedFrag = BrushFragment(vm)
                 val fTrans = supportFragmentManager.beginTransaction()
                 fTrans.replace(R.id.settingFragment, selectedFrag)
                 fTrans.commit()
             }
             else if (it == "size") {
-                val selectedFrag = SizeFragment()
+                val selectedFrag = SizeFragment(vm)
                 val fTrans = supportFragmentManager.beginTransaction()
                 fTrans.replace(R.id.settingFragment, selectedFrag)
                 fTrans.commit()

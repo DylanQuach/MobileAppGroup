@@ -28,8 +28,13 @@ class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val drawingList = ArrayList<ContinuousDrawing>()
 
+    init {
+        // Initialize bitmap, bitmapCanvas, and paint in the init block
+        setBitMap()
+    }
+
     fun setBitMap(){ // pass a reference
-        this.bitmap = Bitmap.createBitmap(800, 800, Bitmap.Config.ARGB_8888)
+        bitmap = Bitmap.createBitmap(800, 800, Bitmap.Config.ARGB_8888)
         bitmapCanvas = Canvas(bitmap)
         paint = Paint()
     }

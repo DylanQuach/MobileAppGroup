@@ -23,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [canvasFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class canvasFragment : Fragment() {
+class canvasFragment(private var vm: BrushViewModel) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,18 +43,15 @@ class canvasFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentCanvasBinding.inflate(inflater)
 
-       // val viewModel : BrushViewModel by activityViewModels()
-//        viewModel.color.observe(viewLifecycleOwner){
-//            binding.customView.drawPaper()
-//        }
+       //val viewModel : BrushViewModel by activityViewModels()
 
-//        val vm : BrushViewModel by viewModels{
-//
-//            WeatherViewModelFactory((activity?.application as PngFileApplicationClass))
-//        }
+
+        vm.color.observe(viewLifecycleOwner){
+            binding.customView.drawPaper()
+        }
+
 
 
 //        // observer??
@@ -76,7 +73,7 @@ class canvasFragment : Fragment() {
 
                     //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
 
-                    //binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value, viewModel.getBrush())
+                    binding.customView.newDrawing(vm.getColor(),vm.getBrushSize().value, vm.getBrush())
                 }
                 MotionEvent.ACTION_MOVE -> {
 

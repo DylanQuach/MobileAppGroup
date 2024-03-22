@@ -11,8 +11,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentSizeBinding
 
 
-class SizeFragment : Fragment() {
-    private lateinit var myViewModel : BrushViewModel
+class SizeFragment(private var vm: BrushViewModel) : Fragment() {
+    //private lateinit var myViewModel : BrushViewModel
 
     val binding: FragmentSizeBinding by lazy { FragmentSizeBinding.inflate(layoutInflater)}
     override fun onCreateView(
@@ -20,7 +20,7 @@ class SizeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activityViewModel : BrushViewModel by activityViewModels()
-        myViewModel = activityViewModel
+        vm = activityViewModel
         binding.sizeSlider.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // TODO Auto-generated method stub
@@ -31,7 +31,7 @@ class SizeFragment : Fragment() {
             }
 
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                myViewModel.pickBrushSize(progress.toFloat())
+                vm.pickBrushSize(progress.toFloat())
                 binding.sizeNum.text = binding.sizeSlider.progress.toString()
             }
         })

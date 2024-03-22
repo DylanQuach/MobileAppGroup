@@ -11,9 +11,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentColorBinding
 
 
-class ColorFragment : Fragment() {
+class ColorFragment(private var vm: BrushViewModel) : Fragment() {
 
-    private lateinit var myViewModel : BrushViewModel
+    //private lateinit var myViewModel : BrushViewModel
 
     val binding: FragmentColorBinding by lazy { FragmentColorBinding.inflate(layoutInflater)}
 
@@ -23,7 +23,7 @@ class ColorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activityViewModel : BrushViewModel by activityViewModels()
-        myViewModel = activityViewModel
+        vm = activityViewModel
 
         binding.blueButton.setOnClickListener{
             activityViewModel.pickColor("blue")

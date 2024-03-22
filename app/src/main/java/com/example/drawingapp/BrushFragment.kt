@@ -9,9 +9,9 @@ import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentBrushBinding
 
 
-class BrushFragment : Fragment() {
+class BrushFragment( private var vm: BrushViewModel) : Fragment() {
 
-    private lateinit var myViewModel : BrushViewModel
+    //private lateinit var myViewModel : BrushViewModel
 
     val binding: FragmentBrushBinding by lazy {FragmentBrushBinding.inflate(layoutInflater)}
 
@@ -20,16 +20,16 @@ class BrushFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activityViewModel : BrushViewModel by activityViewModels()
-        myViewModel = activityViewModel
+        vm = activityViewModel
 
         binding.triangleButton.setOnClickListener{
-            myViewModel.pickBrush("Triangle")
+            vm.pickBrush("Triangle")
         }
         binding.squareButton.setOnClickListener{
-            myViewModel.pickBrush("Square")
+            vm.pickBrush("Square")
         }
         binding.circleButton.setOnClickListener{
-            myViewModel.pickBrush("Circle")
+            vm.pickBrush("Circle")
         }
 
 
