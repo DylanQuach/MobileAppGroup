@@ -52,8 +52,6 @@ class canvasFragment(private var vm: BrushViewModel) : Fragment() {
             binding.customView.drawPaper()
         }
 
-
-
 //        // observer??
 //        viewModel.bitmap.observe(viewLifecycleOwner){
 //            binding.customView.setBitMap()

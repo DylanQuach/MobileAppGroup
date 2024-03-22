@@ -45,7 +45,7 @@ class BrushViewModel( private val application: PngFileApplicationClass) : ViewMo
 
     }
 
-    suspend fun saveDrawing(){
+     suspend fun saveDrawing(){
         // pass through filename, and dir
 
         val filesDir = application.filesDir

@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,6 +79,12 @@ class MainActivity : AppCompatActivity() {
                 val fTrans = supportFragmentManager.beginTransaction()
                 fTrans.replace(R.id.settingFragment, selectedFrag)
                 fTrans.commit()
+            }else if(it=="save"){
+                GlobalScope.launch(Dispatchers.Main) {
+                    vm.saveDrawing()
+                }
+            }else if(it == "load"){
+                
             }
         }
         val fTrans = supportFragmentManager.beginTransaction()

@@ -5,12 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentSelectSettingBinding
-import yuku.ambilwarna.AmbilWarnaDialog
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,7 +23,6 @@ private const val ARG_PARAM2 = "param2"
 class SelectSettingFragment : Fragment() {
 
     private val binding: FragmentSelectSettingBinding by lazy {FragmentSelectSettingBinding.inflate(layoutInflater)}
-    private var clickCallback : () -> Unit = {}
     private lateinit var onclickButton : (buttonName: String) -> Unit
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -44,6 +40,16 @@ class SelectSettingFragment : Fragment() {
         binding.sizeButton.setOnClickListener{
             onclickButton("size")
         }
+
+        binding.saveButton.setOnClickListener{
+            onclickButton("save")
+        }
+
+        binding.loadButton.setOnClickListener{
+            onclickButton("load")
+        }
+
+
         return binding.root
     }
 

@@ -23,7 +23,6 @@ class ColorFragment(private var vm: BrushViewModel) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activityViewModel : BrushViewModel by activityViewModels()
-        vm = activityViewModel
 
         binding.blueButton.setOnClickListener{
             activityViewModel.pickColor("blue")
