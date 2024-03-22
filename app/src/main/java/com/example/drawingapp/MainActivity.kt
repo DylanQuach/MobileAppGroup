@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                     vm.saveDrawing()
                 }
             }else if(it == "load"){
-                
+
             }
         }
         val fTrans = supportFragmentManager.beginTransaction()
