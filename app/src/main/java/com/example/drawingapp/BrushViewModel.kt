@@ -1,12 +1,15 @@
 package com.example.drawingapp
 
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
-class BrushViewModel : ViewModel(){
+class BrushViewModel( private val application: PngFileApplicationClass) : ViewModel(){
+    //class .... (application ...)
 
     //Model
     @RequiresApi(Build.VERSION_CODES.O)
@@ -27,11 +30,33 @@ class BrushViewModel : ViewModel(){
 
     var sizeTrue = 0.0f
 
+    //live data of bitmap
+
+    var bitmap = MutableLiveData<Bitmap>()
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun pickColor(newColor: String){
             _color.value = newColor
     }
-    
+
+
+    fun setBitMap(){
+
+    }
+
+    suspend fun saveDrawing(){
+        // pass through filename, and dir
+
+        val filesDir = application.filesDir
+
+        //temp filename, get from txt value
+
+        val tempName: String = "Hello, world!"
+
+        application.pngFileRepository.saveImage(bitmap.value, tempName, filesDir, application)
+    }
+
     fun pickBrush(newBrush: String){
         _brush.value = newBrush
     }
@@ -51,6 +76,20 @@ class BrushViewModel : ViewModel(){
 
     fun getBrushSize(): LiveData<Float> {
         return size
+    }
+
+}
+
+
+// This factory class allows us to define custom constructors for the view model
+// class ... (application: PngFileApplicationClaa) : ...
+class WeatherViewModelFactory( private val application: PngFileApplicationClass) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(BrushViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return BrushViewModel( application) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 
 }

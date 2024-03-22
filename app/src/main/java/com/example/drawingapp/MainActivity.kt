@@ -8,9 +8,6 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -73,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
         colorBtn = findViewById<Button>(R.id.selectColorBtn)
 
-        color = ContextCompat.getColor(this@MainActivity, com.google.android.material.R.color.design_default_color_primary)
+        //color = ContextCompat.getColor(this@MainActivity, com.google.android.material.R.color.design_default_color_primary)
 
     }
 

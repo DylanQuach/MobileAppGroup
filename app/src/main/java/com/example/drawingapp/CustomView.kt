@@ -12,18 +12,30 @@ import android.view.View
 
 class CustomView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
+    // store a reference to bitmap in customView
+
+    // setbit map method
 
     //OK for this demo, but views are created/destroyed during lifecycle events so
     //this should really be stored in a viewmodel!
-    private val bitmap = Bitmap.createBitmap(800, 800, Bitmap.Config.ARGB_8888)
-    private val bitmapCanvas = Canvas(bitmap)
-    private val paint = Paint()
+    private lateinit var bitmap : Bitmap
+    private lateinit var bitmapCanvas : Canvas
+    private lateinit var paint : Paint
 
     //width/height are 0 when the constructor is called
     //use the lazy delegated property to initialize it on first access, once the size is set
     private val rect: Rect by lazy { Rect(0, 0, width, height) }
 
     private val drawingList = ArrayList<ContinuousDrawing>()
+
+    fun setBitMap(){ // pass a reference
+        this.bitmap = Bitmap.createBitmap(800, 800, Bitmap.Config.ARGB_8888)
+        bitmapCanvas = Canvas(bitmap)
+        paint = Paint()
+    }
+    fun getBitMap(): Bitmap {
+        return bitmap
+    }
 
     fun getDrawingList(): ArrayList<ContinuousDrawing> {
         return drawingList

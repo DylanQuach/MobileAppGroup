@@ -11,9 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.drawingapp.databinding.FragmentCanvasBinding
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,13 +46,26 @@ class canvasFragment : Fragment() {
 
         val binding = FragmentCanvasBinding.inflate(inflater)
 
-        val viewModel : BrushViewModel by activityViewModels()
-        viewModel.color.observe(viewLifecycleOwner){
-            binding.customView.drawPaper()
-        }
+       // val viewModel : BrushViewModel by activityViewModels()
+//        viewModel.color.observe(viewLifecycleOwner){
+//            binding.customView.drawPaper()
+//        }
+
+//        val vm : BrushViewModel by viewModels{
+//
+//            WeatherViewModelFactory((activity?.application as PngFileApplicationClass))
+//        }
+
+
+//        // observer??
+//        viewModel.bitmap.observe(viewLifecycleOwner){
+//            binding.customView.setBitMap()
+//        }
 
         val my_paint = Paint()
         my_paint.color = Color.RED
+
+
 
         binding.customView.setOnTouchListener { _, event ->
             val x = event.x
@@ -65,7 +76,7 @@ class canvasFragment : Fragment() {
 
                     //When the user touches the screen (presses their finger down), the code inside the ACTION_DOWN block is executed.
 
-                    binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value, viewModel.getBrush())
+                    //binding.customView.newDrawing(viewModel.getColor(),viewModel.getBrushSize().value, viewModel.getBrush())
                 }
                 MotionEvent.ACTION_MOVE -> {
 
